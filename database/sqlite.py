@@ -12,6 +12,12 @@ cur.execute("INSERT INTO Branch (Name, Address, Tel) VALUES (?, ?, ?)", ('Tainan
 cur.execute("INSERT INTO Branch (Name, Address, Tel) VALUES (?, ?, ?)", ('Taoyuan', 'No. 56 Chunghua Road.', '038467657'))
 cur.execute("INSERT INTO Branch (Name, Address, Tel) VALUES (?, ?, ?)", ('Taichung', 'No. 131 Keelong Road.', '042387234'))
 
+cur.execute("INSERT INTO Producer (P_ID, Name) VALUES (?, ?)", ('101','Emart'))
+cur.execute("INSERT INTO Producer (P_ID, Name) VALUES (?, ?)", ('102','Costco'))
+cur.execute("INSERT INTO Producer (P_ID, Name) VALUES (?, ?)", ('103','PX'))
+cur.execute("INSERT INTO Producer (P_ID, Name) VALUES (?, ?)", ('104','7-11'))
+cur.execute("INSERT INTO Producer (P_ID, Name) VALUES (?, ?)", ('105','Family'))
+
 
 connection.commit()
 connection.close()

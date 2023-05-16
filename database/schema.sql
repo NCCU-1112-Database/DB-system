@@ -25,14 +25,24 @@ CREATE TABLE Branch (
     Tel VARCHAR 
 );
 
+-- 建立 Producer 表格
+DROP TABLE IF EXISTS Producer;
+CREATE TABLE Producer (
+    P_ID VARCHAR PRIMARY KEY,
+    Name VARCHAR
+);
+
 -- 建立 Material 表格
 DROP TABLE IF EXISTS Material;
 CREATE TABLE Material (
     Ma_ID VARCHAR PRIMARY KEY,
     Name VARCHAR NOT NULL,
     Cost REAL NOT NULL,
-    Remain_num INTEGER NOT NULL
+    Remain_num INTEGER NOT NULL,
+    Producer VARCHAR,
+    FOREIGN KEY (Producer) REFERENCES Producer(P_ID)
 );
+
 
 -- 建立 Purchase 表格
 DROP TABLE IF EXISTS Purchase;
