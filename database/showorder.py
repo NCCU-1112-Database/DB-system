@@ -23,7 +23,7 @@ def get_value():
     cursor.execute('SELECT * FROM Purchase WHERE O_ID = ?', (value,))
     order_data = cursor.fetchone()
 
-    cursor.execute('SELECT Order_description.M_ID, Name, Quantity, Quantity*Price FROM Order_description, Menu WHERE O_ID = ? AND Order_description.M_ID = Menu.M_ID Order by Order_description.M_ID', (value,))
+    cursor.execute('SELECT Order_description.Item_ID, Name, Quantity, Quantity*Price FROM Order_description, Menu WHERE O_ID = ? AND Order_description.Item_ID = Menu.Item_ID Order by Order_description.Item_ID', (value,))
     purchase_data = cursor.fetchall()
     total_price = 0
     for i in purchase_data:
@@ -38,4 +38,3 @@ def get_value():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
