@@ -38,20 +38,20 @@ cur.execute("INSERT INTO Menu (Item_ID, Name, Price) VALUES (?, ?, ?)", ('303', 
 cur.execute("INSERT INTO Menu (Item_ID, Name, Price) VALUES (?, ?, ?)", ('304', 'Black Forest Cake', 120))
 
 #Material
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('101', 'coffee beans', 1200, 0, '104')) #KG
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('102', 'milk', 200, 0, '102')) #2L
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('103', 'caramel syrup', 250, 0, '103')) #250ml
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('104', 'chocolate sauce', 250, 0, '103')) #250ml
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('105', 'matcha', 2500, 0, '103')) #500g
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('106', 'earl gray tea', 1200, 0, '105')) #400g
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('107', 'rose tea', 1200, 0, '105')) #400g
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('108', 'black tea', 1200, 0, '105')) #400g
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('109', 'mango juice', 350, 0, '101')) #1L
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('110', 'ice', 120, 0, '101')) #10L
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('201', 'Blueberry Chocolate Cake', 700, 0, '101')) #12pieces
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('202', 'Citrus Fruit Cake', 500, 0, '104')) #12pieces
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('203', 'Sponge Cheese Cake', 300, 0, '105')) #12pieces
-cur.execute("INSERT INTO Material (Ma_ID, Name, Cost, Remain_num, Producer) VALUES (?, ?, ?, ?, ?)", ('204', 'Black Forest Cake', 500, 0, '103')) #12pieces
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('101', 'coffee beans', 1200, 22, 0, '104')) #KG
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('102', 'milk', 200, 25, 0, '102')) #2L
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('103', 'caramel syrup', 250, 5, 0, '103')) #250ml
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('104', 'chocolate sauce', 250, 5, 0, '103')) #250ml
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('105', 'matcha', 2500, 25, 0, '103')) #500g
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('106', 'earl gray tea', 1200, 12, 0, '105')) #400g
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('107', 'rose tea', 1200, 12, 0, '105')) #400g
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('108', 'black tea', 1200, 12, 0, '105')) #400g
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('109', 'mango juice', 350, 70, 0, '101')) #1L
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('110', 'ice', 120,12, 0, '101')) #10L
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('201', 'Blueberry Chocolate Cake', 720, 60, 0, '101')) #12pieces
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('202', 'Citrus Fruit Cake', 540, 45,  0, '104')) #12pieces
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('203', 'Sponge Cheese Cake', 300, 25, 0, '105')) #12pieces
+cur.execute("INSERT INTO Material (Ma_ID, Name, Cost,Cost_per_unit, Remain_num, Producer) VALUES (?, ?, ?, ?, ?, ?)", ('204', 'Black Forest Cake', 540, 45, 0, '103')) #12pieces
 
 #Recipe
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('101','101'))
@@ -77,6 +77,7 @@ cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('204','102'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('204','107'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('205','104'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('206','109'))
+
 
 connection.commit()
 connection.close()

@@ -30,7 +30,8 @@
                 <tr>
                     <th class="fs-5">食材名稱</th>
                     <th class="fs-5">成本</th>
-                    <th class="fs-5">剩餘數量</th>
+                    <th class="fs-5">單位成本</th>
+                    <th class="fs-5">剩餘單位數量</th>
                     <th class="fs-5">供應商</th>
                 </tr>
             </thead>
@@ -39,8 +40,9 @@
                 <tr >
                     <td>{{ Ma[0] }}</td>
                     <td>${{ Ma[1] }}</td>
-                    <td>{{ Ma[2] }}</td>
+                    <td>${{ Ma[2] }}</td>
                     <td>{{ Ma[3] }}</td>
+                    <td>{{ Ma[4] }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

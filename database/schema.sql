@@ -39,6 +39,7 @@ CREATE TABLE Material (
     Ma_ID VARCHAR PRIMARY KEY,
     Name VARCHAR NOT NULL,
     Cost REAL NOT NULL,
+    Cost_per_unit REAL NOT NULL,
     Remain_num INTEGER NOT NULL,
     Producer VARCHAR,
     FOREIGN KEY (Producer) REFERENCES Producer(P_ID)
