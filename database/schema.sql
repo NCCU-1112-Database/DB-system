@@ -14,7 +14,8 @@ DROP TABLE IF EXISTS Menu;
 CREATE TABLE Menu (
     Item_ID VARCHAR PRIMARY KEY,
     Name VARCHAR NOT NULL,
-    Price REAL NOT NULL
+    Price REAL NOT NULL,
+    class VARCHAR
 );
 
 -- 建立 Branch 表格
@@ -48,7 +49,7 @@ CREATE TABLE Material (
 DROP TABLE IF EXISTS Purchase;
 CREATE TABLE Purchase (
     O_ID VARCHAR PRIMARY KEY,
-    Time DATE NOT NULL,
+    Purchase_time DATE NOT NULL,
     Buyer VARCHAR NOT NULL,
     Branch VARCHAR NOT NULL,
     FOREIGN KEY (Buyer) REFERENCES Member(Email),
@@ -60,9 +61,32 @@ DROP TABLE IF EXISTS Order_description;
 CREATE TABLE Order_description (
     O_ID VARCHAR,
     Item_ID VARCHAR,
+    Quantity INTEGER NOT NULL,
     PRIMARY KEY (O_ID, Item_ID),
     FOREIGN KEY (O_ID) REFERENCES Purchase(O_ID),
     FOREIGN KEY (Item_ID) REFERENCES Menu(Item_ID) ON DELETE CASCADE ON UPDATE CASCADE 
+);
+
+-- 建立 Ma_Purchase 表格
+DROP TABLE IF EXISTS Ma_Purchase;
+CREATE TABLE Ma_Purchase (
+    MaP_ID VARCHAR PRIMARY KEY,
+    Ma_Purchase_time DATE NOT NULL,
+    Buyer VARCHAR NOT NULL,
+    Supply VARCHAR NOT NULL,
+    FOREIGN KEY (Buyer) REFERENCES Branch(Name),
+    FOREIGN KEY (Supply) REFERENCES Producer(P_ID)
+);
+
+-- 建立 Ma_Purchase_description 表格
+DROP TABLE IF EXISTS Ma_Purchase_description;
+CREATE TABLE Ma_Purchase_description (
+    MaP_ID VARCHAR,
+    Ma_ID VARCHAR,
+    Quantity INTEGER NOT NULL,
+    PRIMARY KEY (MaP_ID, Ma_ID),
+    FOREIGN KEY (MaP_ID) REFERENCES Ma_Purchase(MaP_ID),
+    FOREIGN KEY (Ma_ID) REFERENCES Material(Ma_ID) ON DELETE CASCADE ON UPDATE CASCADE 
 );
 
 -- 建立 Employee 表格
