@@ -1,0 +1,33 @@
+{% extends "parts/base.html" %}
+
+{% block title %}歷史訂單{% endblock title %}
+{% block scripts %}
+{{ super() }}
+<script src="{{ url_for('static', filename='jquery/jquery-3.5.1.min.js') }}"></script>
+{{ moment.include_moment() }}
+{{ moment.locale('zh-tw') }}
+{% endblock scripts %}
+
+{% block page_content %}
+{{ super() }}
+<div class="card-group ">
+    <div class="card ">
+        <div class="card-body">
+            <h5 class="card-title">鹿港店</h5>
+            <p class="card-text">查看店家月收入</p>
+        </div>
+        <div class="card-footer">
+            <a href="/purchase/6" class="btn btn-primary">Go to check</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">文山區</h5>
+            <p class="card-text">查看店家月收入</p>
+        </div>
+        <div class="card-footer">
+            <a href="/purchase/7" class="btn btn-primary">Go to check</a>
+        </div>
+    </div>
+</div>
+{% endblock page_content %}

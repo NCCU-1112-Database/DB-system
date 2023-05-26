@@ -4,12 +4,12 @@ from datetime import datetime
 import sqlalchemy as db
 from sqlalchemy import func
 import math
-from view.member_register import member_app
+from view.purchase import branch_app
 
 
 app = Flask(__name__)
 moment = Moment(app)
-app.register_blueprint(member_app)
+app.register_blueprint(branch_app)
 
 
 @app.route('/')
