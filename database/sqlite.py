@@ -1,7 +1,8 @@
-import sqlite3
+import sqlite3, os
 
+if os.path.exists('coffee.db'):
+    os.remove('coffee.db')
 connection = sqlite3.connect('coffee.db')
-
 with open('schema.sql') as f:
     connection.executescript(f.read())
 
@@ -77,6 +78,11 @@ cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('204','102'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('204','107'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('205','104'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('206','109'))
+
+cur.execute("INSERT INTO Member (Email, Name, Password, Tel) VALUES (?, ?, ?, ?)", ("Flave@gmail.com", "Flave", "Flave", "0123456789"))
+cur.execute("INSERT INTO Member (Email, Name, Password, Tel) VALUES (?, ?, ?, ?)", ("HaoPo@gmail.com", "HaoPo", "HaoPo", "0123456789"))
+cur.execute("INSERT INTO Employee (E_ID, Name, Password, Tel, Branch) VALUES (?, ?, ?, ?, ?)", ("Emp001", "HaoPO", "Emp001", "9876543210", "Taipei"))
+cur.execute("INSERT INTO Employee (E_ID, Name, Password, Tel, Branch) VALUES (?, ?, ?, ?, ?)", ("Emp002", "RenJ", "Emp002", "9876543210", "Taipei"))
 
 
 connection.commit()

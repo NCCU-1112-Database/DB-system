@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link href="..\static\style.css" rel="stylesheet">
+    <title>main page</title>
+  </head>
+  <body>
+    {% if session.get('username') %}
+      <a href='/logout'>logout</a>
+    {% else %}
+      <a href='/login'>login page</a>
+    {% endif %}
+    <br>
+    <a href='/register'>register page</a>		
+    <h1>Welcome to __ !</h1>
+    <h2>Our Menu</h2>
+    <ul>
+      <li>coffee</li>
+      <li>other drink</li>
+      <li>cake</li>
+    </ul>
+  </body>
+</html>
