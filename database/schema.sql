@@ -12,7 +12,7 @@ CREATE TABLE Member (
 -- 建立 Menu 表格
 DROP TABLE IF EXISTS Menu;
 CREATE TABLE Menu (
-    Item_ID VARCHAR PRIMARY KEY,
+    Item_ID INTEGER PRIMARY KEY,
     Name VARCHAR NOT NULL,
     Price REAL NOT NULL
 );
@@ -20,7 +20,8 @@ CREATE TABLE Menu (
 -- 建立 Branch 表格
 DROP TABLE IF EXISTS Branch;
 CREATE TABLE Branch (
-    Name VARCHAR PRIMARY KEY,
+    B_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Name VARCHAR,
     Address VARCHAR,
     Tel VARCHAR 
 );
@@ -47,12 +48,12 @@ CREATE TABLE Material (
 -- 建立 Purchase 表格
 DROP TABLE IF EXISTS Purchase;
 CREATE TABLE Purchase (
-    O_ID VARCHAR PRIMARY KEY,
-    Time DATE NOT NULL,
+    O_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Purchase_Time DATE NOT NULL,
     Buyer VARCHAR NOT NULL,
     Branch VARCHAR NOT NULL,
     FOREIGN KEY (Buyer) REFERENCES Member(Email),
-    FOREIGN KEY (Branch) REFERENCES Branch(Name)
+    FOREIGN KEY (Branch) REFERENCES Branch(B_ID)
 );
 
 -- 建立 Order_description 表格

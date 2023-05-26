@@ -2,7 +2,7 @@ import sqlite3
 
 connection = sqlite3.connect('coffee.db')
 
-with open('schema.sql') as f:
+with open('schema.sql',encoding='utf-8') as f:
     connection.executescript(f.read())
 
 cur = connection.cursor()
@@ -11,6 +11,10 @@ cur.execute("INSERT INTO Branch (Name, Address, Tel) VALUES (?, ?, ?)", ('Kaohsi
 cur.execute("INSERT INTO Branch (Name, Address, Tel) VALUES (?, ?, ?)", ('Tainan', 'No. 123 Mingzu Road.', '062353657'))
 cur.execute("INSERT INTO Branch (Name, Address, Tel) VALUES (?, ?, ?)", ('Taoyuan', 'No. 56 Chunghua Road.', '038467657'))
 cur.execute("INSERT INTO Branch (Name, Address, Tel) VALUES (?, ?, ?)", ('Taichung', 'No. 131 Keelong Road.', '042387234'))
+cur.execute("INSERT INTO  Branch (Name, Address, Tel) VALUES (?, ?, ?)",
+            ('鹿港店','彰化縣鹿港鎮','0988375864'))
+cur.execute("INSERT INTO  Branch (Name, Address, Tel) VALUES (?, ?, ?)",
+            ('文山店','台北縣文山區','0988324521'))
 
 cur.execute("INSERT INTO Producer (P_ID, Name) VALUES (?, ?)", ('101','Emart'))
 cur.execute("INSERT INTO Producer (P_ID, Name) VALUES (?, ?)", ('102','Costco'))
@@ -77,6 +81,38 @@ cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('204','102'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('204','107'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('205','104'))
 cur.execute("INSERT INTO Recipe (Item_ID, Ma_ID) VALUES (?, ?)", ('206','109'))
+
+#Member
+cur.execute("INSERT INTO Member (Email,Name,Password,Tel) VALUES (?, ?, ?,?)",
+            ('a@gmail.com','小小','123', '0988384859'))
+cur.execute("INSERT INTO Member (Email,Name,Password,Tel) VALUES (?, ?, ?,?)",
+            ('ab@gmail.com','大大','13', '0988239405'))
+
+#Purchase
+cur.execute("INSERT INTO Purchase (Purchase_Time, Buyer, Branch) VALUES (?, ?, ?)",
+            ('2022-01-02', 'a@gmail.com', '6'))
+cur.execute("INSERT INTO Purchase (Purchase_Time, Buyer, Branch) VALUES (?, ?, ?)",
+            ('2022-01-01', 'a@gmail.com', '6'))
+cur.execute("INSERT INTO Purchase (Purchase_Time, Buyer, Branch) VALUES (?, ?, ?)",
+            ('2022-01-01', 'ab@gmail.com', '7'))
+
+#Order_description
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('1','101'))
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('1','102'))
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('3','101'))
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('3','105'))
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('2','101'))
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('2','103'))
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('3','103'))
+cur.execute("INSERT INTO Order_description (O_ID, Item_ID) VALUES (?, ?)",
+            ('1','103'))
 
 connection.commit()
 connection.close()
