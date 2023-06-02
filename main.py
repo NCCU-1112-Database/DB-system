@@ -5,11 +5,14 @@ import sqlalchemy as db
 from sqlalchemy import func
 import math
 from view.purchase import branch_app
+from view.member import member_app
 
 
 app = Flask(__name__)
+app.secret_key="coffee.db"
 moment = Moment(app)
 app.register_blueprint(branch_app)
+app.register_blueprint(member_app)
 
 
 @app.route('/')
