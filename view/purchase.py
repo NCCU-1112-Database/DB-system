@@ -25,7 +25,7 @@ def index():
     return render_template('branch_index.html', page_header="purchase functions", current_Purchase_Time=datetime.utcnow())
 
 
-@branch_app.route('/<int:Branch>')
+@branch_app.route('/<string:Branch>')
 def branch_order_show(Branch):
     Session = sessionmaker(bind=engine)
     session = Session()
@@ -34,7 +34,7 @@ def branch_order_show(Branch):
         # 执行查询
         query = session.query(
             table_purchase.c.O_ID,
-            table_purchase.c.Purchase_Time,
+            table_purchase.c.Purchase_time,
             table_purchase.c.Buyer,
             table_purchase.c.Branch,
             cast(func.sum(table_menu.c.Price), Integer).label('TotalAmount')
@@ -44,7 +44,7 @@ def branch_order_show(Branch):
             table_purchase.c.Branch == Branch
         ).group_by(
             table_purchase.c.O_ID,
-            table_purchase.c.Purchase_Time,
+            table_purchase.c.Purchase_time,
             table_purchase.c.Buyer,
             table_purchase.c.Branch
         )
@@ -57,7 +57,7 @@ def branch_order_show(Branch):
         for row in results:
             order_info = {
                 'O_ID': row.O_ID,
-                'Purchase_Time': row.Purchase_Time,
+                'Purchase_Time': row.Purchase_time,
                 'Buyer': row.Buyer,
                 'Branch': row.Branch,
                 'TotalAmount': row.TotalAmount

@@ -1,9 +1,10 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <style>
+    .navbar-dark .navbar-nav .nav-link {
+      color: white;
+    }
+  </style>
+  <div class="container-fluid">
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
@@ -24,8 +25,11 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/purchase">Order History index</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/purchase/6">鹿港店</a></li>
-              <li><a class="dropdown-item" href="/purchase/7">文山店</a></li>
+              <li><a class="dropdown-item" href="/purchase/Taipei">Taipei</a></li>
+              <li><a class="dropdown-item" href="/purchase/Kaohsiung">Kaohsiung</a></li>
+              <li><a class="dropdown-item" href="/purchase/Tainan">Tainan</a></li>
+              <li><a class="dropdown-item" href="/purchase/Taoyuan">Taoyuan</a></li>
+              <li><a class="dropdown-item" href="/purchase/Taichung">Taichung</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -33,19 +37,9 @@
               Menu
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/purchase">purchase function index</a></li>
+              <li><a class="dropdown-item" href="/menu">show Menu</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/purchase/6">?</a></li>
-            </ul>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Ingredients Purchase
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/purchase">purchase function index</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/purchase/6">?</a></li>
+              <li><a class="dropdown-item" href="/menu">edit Menu</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -53,9 +47,7 @@
               Supplier
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="/purchase">supplier function index</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/purchase/6">?</a></li>
+              <li><a class="dropdown-item" href="/ingredient">show ingredient</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -65,8 +57,11 @@
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
               <li><a class="dropdown-item" href="/purchase">purchase function index</a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="/purchase/6">鹿港店</a></li>
-              <li><a class="dropdown-item" href="/purchase/7">文山店</a></li>
+              <li><a class="dropdown-item" href="/purchase/Taipei">Taipei</a></li>
+              <li><a class="dropdown-item" href="/purchase/Kaohsiung">Kaohsiung</a></li>
+              <li><a class="dropdown-item" href="/purchase/Taoyuan">Taoyuan</a></li>
+              <li><a class="dropdown-item" href="/purchase/Taichung">Taichung</a></li>
+              <li><a class="dropdown-item" href="/purchase/Tainan">Tainan</a></li>
             </ul>
           </li>
         </ul>
