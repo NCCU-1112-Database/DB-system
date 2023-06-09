@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Orders</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            /* padding-top: 5rem; */
+            padding-bottom: 5rem;
+        }
+
+        .table-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .center-align {
+            text-align: center;
+        }
+
+        .operation-cell {
+            position: relative;
+        }
+
+        .operation-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .operation-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        .operation-buttons .btn {
+            margin: 0 5px;
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            $('.delete-btn').on('click', function (e) {
+                e.preventDefault();
+
+                var itemId = $(this).data('item-id');
+                var row = $(this).closest('tr');
+
+                $.ajax({
+                    url: '/menu/delete_item',
+                    type: 'POST',
+                    data: { id: itemId },
+                    success: function (response) {
+                        row.remove();
+                    }
+                });
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <style>
+            .navbar-dark .navbar-nav .nav-link {
+                color: white;
+            }
+        </style>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ url_for('branch_app.index') }}">Home</a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Order History
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/purchase">Order History index</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/purchase/Taipei">Taipei</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Kaohsiung">Kaohsiung</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Tainan">Tainan</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Taoyuan">Taoyuan</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Taichung">Taichung</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Menu
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/menu">show Menu</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/menu">edit Menu</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Supplier
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/ingredient">show ingredient</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Purchase Monthly Income
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/purchase">purchase function index</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/purchase/Taipei">Taipei</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Kaohsiung">Kaohsiung</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Taoyuan">Taoyuan</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Taichung">Taichung</a></li>
+                            <li><a class="dropdown-item" href="/purchase/Tainan">Tainan</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('order_menu.logout')}}">登出</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="table-container">
+        <h1 class="text-center mb-5 mt-5 fw-bold">菜單</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="fs-5">商品名稱</th>
+                    <th class="fs-5">價格</th>
+                    <th class="fs-5 operation-cell">
+                        <span class="operation-text">操作</span>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in menu %}
+                <tr>
+                    <td>{{ item[0] }}</td>
+                    <td>${{ item[1] }}</td>
+                    <td class="center-align operation-cell">
+                        <div class="operation-buttons">
+                            <div>
+                                <a href="/menu/update_item?id={{ item[2] }}" class="btn btn-primary">Update</a>
+                            </div>
+                            <div>
+                                <a href="#" class="btn btn-danger delete-btn" data-item-id="{{ item[2] }}">Delete</a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ messages[0] }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% endwith %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="text-center">
+        <a href="/menu/add_new_item" class="btn btn-primary d-grid col-2 mx-auto">Add New Item</a>
+    </div>
+</body>
+
+</html>
