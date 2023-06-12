@@ -2,6 +2,7 @@ from flask import Blueprint, request, render_template, session, redirect, url_fo
 import sqlite3
 from  collections import defaultdict
 import json
+from datetime import datetime
 
 order_menu = Blueprint('order_menu', __name__)
 
@@ -67,19 +68,18 @@ def get_order_menu():
 
 
 res = {}
-@order_menu.route('/home')
+
+@order_menu.route('/')
 def home():
     session['branch'] = '選擇取餐地點'
     res.clear()
+
     return redirect(url_for('order_menu.od_mu'))
 
 
-@order_menu.route('/')
+@order_menu.route('/homepage')
 def od_mu():
     username = session.get('username')
-
-    if session.get('branch') == None:
-        session['branch'] = '選擇取餐地點'
 
     if request.method == 'GET':
         branch, order_menu_list = get_order_menu()
@@ -101,8 +101,15 @@ def od_mu():
             detil.append(int(tmp[1]))
             detil.append(int(tmp[1])*order_menu_list['cakes'][num]['price'])
         res[tmp[0]] = detil
-    print(res)
-    return render_template("ordermenu.html", branch=branch, order_menu_list=order_menu_list, username=username, res=res)
+    # print(res)
+
+    total = 0
+    for i in res:
+        total += res[i][2]
+
+    return render_template("ordermenu.html", 
+                           branch=branch, order_menu_list=order_menu_list, 
+                           username=username, res=res, total=total)
 
 
 @order_menu.route('/order_check', methods=['POST'])
@@ -119,29 +126,61 @@ def submit_order():
     print(request.form)
 
     if 'disorder' in request.form:
-        print('disorder')
         del res[request.form.get('disorder')]
 
     elif 'ordersubmit' in request.form:
-        if request.form.get('ordersubmit') == '選擇取餐地點':
+        state = request.form.get('ordersubmit').split(',')
+        session['branch'] = state[0]
+
+        if state[1] == 'None':
+            flash('請先登入會員')
+            return redirect(url_for('order_menu.od_mu'))
+        elif state[0] == '選擇取餐地點':
             flash('請選擇取餐地點')
             return redirect(url_for('order_menu.od_mu'))
         
-        session['branch'] = request.form.get('ordersubmit')
-        return "yes, order"
+        conn = sqlite3.connect('db/coffee.db')
+        c = conn.cursor()
+        c.execute('SELECT Max(O_ID) FROM Purchase')
+        new_O_ID = str(int(c.fetchone()[0]) + 1)
+        print('O_ID= ', new_O_ID)
+        purchase_time = datetime.now().strftime("%Y-%m-%d")
+        print('purchase_time= ', purchase_time)
+        
+        c.execute("""
+                  INSERT INTO Purchase (O_ID, Purchase_time, Buyer, Branch)
+                  VALUES (?, ?, ?, ?)
+                  """, (new_O_ID, purchase_time, state[1], state[0]))
+
+        for id in res:
+            print('id= ', id)
+            print('res[id]= ', res[id])
+            c.execute("""
+                      INSERT INTO Order_description (O_ID, Item_ID, Quantity)
+                      VALUES (?, ?, ?)
+                      """, (new_O_ID, id, res[id][1]))
+        conn.commit()
+        c.close()
+
+        total = 0
+        for i in res:
+            total += res[i][2]
+    
+        return render_template('thankorder.html', new_O_ID="new_O_ID", 
+                               res=res, branch=state[0], username=state[1], total=total)
     
     else:
         for i in request.form.keys():
             item_id = i
-            print('item_id= ', item_id)
+            # print('item_id= ', item_id)
             if (num := request.form.get(item_id)) == '':
                 flash('請輸入數量')
                 return redirect(url_for('order_menu.od_mu'))
-            print('1.num= ', num)
+            # print('1.num= ', num)
             num = int(num)
-        print('2.num= ', num)
+        # print('2.num= ', num)
         if num != 0:
-            print(res[item_id][1], res[item_id][2])
+            # print(res[item_id][1], res[item_id][2])
             res[item_id][2] = (res[item_id][2]/res[item_id][1]) * num
             res[item_id][1] = num
         else:
@@ -152,4 +191,5 @@ def submit_order():
 @order_menu.route('/logout')
 def logout():
     del session['username']
+    res.clear()
     return redirect(url_for('order_menu.home'))

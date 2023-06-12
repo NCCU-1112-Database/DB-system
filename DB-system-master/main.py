@@ -19,7 +19,7 @@ app.register_blueprint(menu_app)
 app.register_blueprint(ingredient_app)
 
 
-@app.route('/')
+@app.route('/admin')
 def index():
     return render_template('index.html',
                            page_header="index",

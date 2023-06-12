@@ -123,7 +123,7 @@
 
 {% if res %}
 <form id="submit_form" action="{{ url_for('order_menu.submit_order') }}" method="post">
-    <div class="container" style="margin-top: -100px;">
+    <div class="container" style="margin-top: -50px;">
         <div class="row">
             <div class="col-3"></div>
             <div class="col-6">
@@ -152,20 +152,26 @@
                             </td>
                         </tr>
                         {% endfor %}
+                        <tr class="table-Secondary">
+                            <td></td>
+                            <td style="text-align: center; font-weight: bold;">總價</td>
+                            <td style="text-align: center;">{{ total }}</td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
-            </div>
-            <div class="col-3 checkorder">
-
-                {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                {% for message in messages %}
-                <li class="list-group-item list-group-item-danger" style="position: fixed;">{{ message }}</li>
-                {% endfor %}
-                {% endif %}
-                {% endwith %}
-                <button class="btn btn-secondary" type="submit" id="mybtn" name="ordersubmit">下單</button>
-
+                <div class="checkorder">
+    
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    <li class="list-group-item list-group-item-danger" style="position: fixed;">{{ message }}</li>
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                    <button class="btn btn-secondary" type="submit" id="mybtn" name="ordersubmit">下單</button>
+    
+                </div>
             </div>
         </div>
     </div>
@@ -185,12 +191,7 @@
 
     document.getElementById("check_form").addEventListener('submit', function (e) {
         // 會員
-        var username = "{{ username }}";
-        if (username == "None") {
-            alert("請先登入~~");
-            e.preventDefault();
-            return;
-        }
+
 
         // 取餐地點
         var branch_name = document.getElementById("b_name").innerHTML;
@@ -258,22 +259,10 @@
 
     document.getElementById("submit_form").addEventListener('submit', function (e) {
 
-
-
-
-
-
+        var username = "{{ username }}";
         var branch_name = document.getElementById("b_name").innerHTML;
-        // if (branch_name == "選擇取餐地點") {
-        //     e.preventDefault();
-        //     alert("麻煩先幫我選一下取餐地點喔~~");
-        //     return;
-        // }
 
-
-
-
-        document.getElementById('mybtn').value = branch_name;
+        document.getElementById('mybtn').value = branch_name+","+username;
 
     });
 

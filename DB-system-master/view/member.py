@@ -38,12 +38,12 @@ def login_submit():
         session['username']=acc
         session['type']=state
         #please redirect to the menu page.
-        return redirect("/")
+        return redirect(url_for('order_menu.od_mu'))
     else:
         #please redirect to the admin page
         session['username']=acc
         session['type']=state
-        return redirect(url_for('branch_app.index'))
+        return redirect(url_for('index'))
     return redirect("/login")
 
 #register page

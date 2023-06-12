@@ -40,13 +40,14 @@
     box-sizing: border-box;
     background-color: transparent;
 }
+        
 
 .checkorder {
-    position: relative;
-    text-align: left;
+    display: flex;
 }
+
 
 .checkorder button {
     position: absolute;
-    bottom: 0;
+    left: 63%;
 }

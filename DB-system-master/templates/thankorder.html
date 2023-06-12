@@ -1,0 +1,85 @@
+{% extends "parts/base_custermer.html" %}
+
+{% block link %}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+TC&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Thank you{% endblock %}
+
+{% block style %}
+<style>
+    .topic {
+        font-family: 'Dancing Script', cursive;
+        font-size: 80px;
+        color: #333;
+        margin-bottom: 30px;
+    }
+
+    p {
+        font-family: 'Noto Sans TC', sans-serif;
+        font-size: 20px;
+        color: #333;
+    }
+
+    td {
+        font-family: 'Noto Sans TC', sans-serif;
+        color: #333;
+    }
+</style>
+
+{% endblock %}
+
+{% block navbar_right %}
+<a href="{{ url_for('order_menu.logout') }}" class="nav-link">登出</a>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row" style="padding: 100px;">
+        <div class="col-md-12">
+            <h1 class="text-center topic">Thank you for order!</h1>
+            <p class="text-center">Your order has been placed and will be processed as soon as possible.</p>
+        </div>
+    </div>
+
+    <p style="padding-left: 15%;">訂單編號： {{ new_O_ID }}</p>
+    <p style="padding-left: 15%;">取餐地點： {{ branch }}</p>
+    <p style="padding-left: 15%;">餐點資訊  </p>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <table class="table table-striped table-fluid">
+                <thead>
+                    <tr class="table-Secondary">
+                        <th scope="col" style="width: 50%;">品項</th>
+                        <th scope="col" style="width: 20%; text-align: center;">數量</th>
+                        <th scope="col" style="width: 20%; text-align: center;">價格</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in res %}
+                    <tr class="table-Secondary">
+                        <td>{{ res[item][0] }}</td>
+                        <td style="text-align: center;">{{ res[item][1] }}</td>
+                        <td style="text-align: center;">{{ res[item][2] }}</td>
+                    </tr>
+                    {% endfor %}
+                    <tr class="table-Secondary">
+                        <td></td>
+                        <td style="text-align: center;">總結</td>
+                        <td style="text-align: center;">{{ total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                <a class="btn btn-secondary" href="{{ url_for('order_menu.home')}}">回首頁</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
