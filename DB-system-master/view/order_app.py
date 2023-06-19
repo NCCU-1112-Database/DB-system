@@ -6,7 +6,19 @@ from datetime import datetime
 
 order_menu = Blueprint('order_menu', __name__)
 
-def get_order_menu():
+res = {}
+
+@order_menu.route('/')
+def home():
+    session['branch'] = '選擇取餐地點'
+    res.clear()
+
+    return redirect(url_for('order_menu.od_mu'))
+
+
+@order_menu.route('/homepage')
+def od_mu():
+    username = session.get('username')
 
     c = sqlite3.connect('db/coffee.db').cursor()
     c.execute("""
@@ -63,26 +75,6 @@ def get_order_menu():
             order_menu_list["cakes"].append(product)
 
         combine += 1
-    
-    return branch, order_menu_list
-
-
-res = {}
-
-@order_menu.route('/')
-def home():
-    session['branch'] = '選擇取餐地點'
-    res.clear()
-
-    return redirect(url_for('order_menu.od_mu'))
-
-
-@order_menu.route('/homepage')
-def od_mu():
-    username = session.get('username')
-
-    if request.method == 'GET':
-        branch, order_menu_list = get_order_menu()
 
     tmp = request.args.getlist('detil')
     detil = []
