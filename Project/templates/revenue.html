@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Orders</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+        .title {
+            cursor : pointer;
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand fw-bold" href="/admin">我有咖啡你有DB嗎</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="/showorder">歷史訂單</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/ingredient">庫存</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/menu">上傳菜單</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/revenue">收益</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout" style="color: red;">登出</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+
+    <div class="table container col-10">
+        <h1 class="text-center mb-5 mt-5 fw-bold">訂單紀錄</h1>
+        <!-- 添加下拉式表单 -->
+        <form action="/revenue_month" method="POST" class="mb-3">
+            <div class="input-group">
+                <label for="month-select" class="input-group-text">選擇月份：</label>
+                <select class="form-select" id="month-select" name="month">
+                    <option value="1">1月</option>
+                    <option value="2">2月</option>
+                    <option value="3">3月</option>
+                    <option value="4">4月</option>
+                    <option value="5">5月</option>
+                    <option value="6">6月</option>
+                    <option value="7">7月</option>
+                    <option value="8">8月</option>
+                    <option value="9">9月</option>
+                    <option value="10">10月</option>
+                    <option value="11">11月</option>
+                    <option value="12">12月</option>
+                </select>
+                <button type="submit" class="btn btn-primary">查詢</button>
+            </div>
+        </form>
+
+        <table class="table table-striped" id="myTable">
+            <!-- 表格内容省略 -->
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $("#myTable").tablesorter();
+      });
+    </script>
+
+
+</body>
+</html>

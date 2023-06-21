@@ -1,0 +1,97 @@
+{% extends "parts/base_custermer.html" %}
+
+{% block title %}register{% endblock title %}
+
+{% block navbar_right %}
+<a href="{{ url_for('member_app.login') }}" class="nav-link" style="color: white;">登入</a>
+{% endblock %}
+
+{% block style %}
+{{ super() }}
+<style>
+  .content {
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 28px;
+    color: #333;
+    margin-top: 40px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  form p {
+    margin-bottom: 5px;
+    text-align: left;
+    width: 200px;
+  }
+
+  form input[type="text"],
+  form input[type="password"] {
+    padding: 5px;
+    width: 200px;
+  }
+
+  form input[type="submit"] {
+    margin-top: 10px;
+    padding: 5px 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+
+  .message {
+    color: #f00;
+    margin-top: 10px;
+  }
+</style>
+
+{% endblock %}
+
+{% block content %}
+<div class="container" style="padding-top: 50px;">
+  <div class="content">
+    <h1>註冊後即可登入</h1>
+    {% with messages=get_flashed_messages() %}
+      {% if messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+            <li>{{message}}</li>
+          {% endfor %}
+        <ul>
+      {% endif %}
+    {% endwith %}
+    <form action="/register_submit" method="POST">
+      <div style="display: flex; flex-direction: column; align-items: flex-start;">
+        <p>使用您的E-mail創建帳號</p>
+        <input type="text" name="username" placeholder="您的Email">
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        <p>我們該如何稱呼您:</p>
+        <input type="text" name="name" placeholder="您的稱呼">
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        <p>您的聯絡方式:</p>
+        <input type="text" name="Tel" placeholder="您的手機或市話">
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        <p>設定您的密碼</p>
+        <input type="password" name="password" placeholder="密碼">
+      </div>
+      <div style="display: flex; flex-direction: column; align-items: flex-start; margin-top: 10px;">
+        <p>再次確認您的密碼</p>
+        <input type="password" name="confirm" placeholder="再次輸入您的密碼">
+      </div>
+      <input type="submit" value="提交">
+    </form>
+  </div>
+</div>
+{% endblock %}
