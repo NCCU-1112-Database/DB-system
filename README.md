@@ -8,7 +8,7 @@ pip install SQLAlchemy
 pip install pandas
 ```
 
-### 執行```main.py```
+### 執行```project/main.py```
 
 使用瀏覽器進入預設127.0.0.1:5000
 
